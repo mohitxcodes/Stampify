@@ -146,83 +146,55 @@ export default function OutputPage() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-                    <button
-                        onClick={handleDownload}
-                        disabled={!watermarkedImage || isDownloading}
-                        className="w-full sm:w-auto px-8 py-4 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold text-lg transition-all duration-300 transform hover:from-indigo-700 hover:to-purple-700 hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
-                    >
-                        {isDownloading ? (
-                            <>
-                                <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                <span>Downloading...</span>
-                            </>
-                        ) : (
-                            <>
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                </svg>
-                                <span>Download Image</span>
-                            </>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                    <div className="relative w-full sm:w-auto">
+                        {!isDownloading && watermarkedImage && (
+                            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl blur-lg opacity-50 animate-pulse"></div>
                         )}
-                    </button>
+                        <button
+                            onClick={handleDownload}
+                            disabled={!watermarkedImage || isDownloading}
+                            className="relative w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white rounded-2xl font-bold text-lg transition-all duration-500 transform hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 hover:scale-105 shadow-2xl hover:shadow-3xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-3 active:scale-95"
+                        >
+                            {isDownloading ? (
+                                <>
+                                    <svg className="animate-spin h-6 w-6" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    <span>Downloading...</span>
+                                </>
+                            ) : (
+                                <>
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                    <span>📥 Download Image</span>
+                                </>
+                            )}
+                        </button>
+                    </div>
 
                     <button
                         onClick={handleShare}
                         disabled={!watermarkedImage}
-                        className="w-full sm:w-auto px-8 py-4 bg-white text-indigo-600 border-2 border-indigo-600 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:bg-indigo-50 hover:scale-105 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
+                        className="w-full sm:w-auto px-10 py-4 bg-white/80 backdrop-blur-sm text-indigo-600 border-2 border-indigo-600 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:bg-indigo-50 hover:scale-105 hover:border-indigo-700 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-3 active:scale-95"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                         </svg>
-                        <span>Share</span>
+                        <span>🔗 Share</span>
                     </button>
 
                     <button
                         onClick={handleStartOver}
-                        className="w-full sm:w-auto px-8 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:bg-gray-200 hover:scale-105 shadow-md hover:shadow-lg flex items-center justify-center space-x-2"
+                        className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:from-gray-200 hover:to-gray-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-3 active:scale-95"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                         </svg>
-                        <span>Start Over</span>
+                        <span>🔄 Start Over</span>
                     </button>
-                </div>
-
-                {/* Features Grid */}
-                <div className="grid md:grid-cols-3 gap-6">
-                    <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
-                            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">High Quality</h3>
-                        <p className="text-gray-600 text-sm">Original image quality preserved with professional watermark</p>
-                    </div>
-
-                    <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                            <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                            </svg>
-                        </div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Secure Processing</h3>
-                        <p className="text-gray-600 text-sm">Your images are processed securely and not stored</p>
-                    </div>
-
-                    <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                            <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Instant Download</h3>
-                        <p className="text-gray-600 text-sm">Download your watermarked image immediately</p>
-                    </div>
                 </div>
             </div>
         </div>
