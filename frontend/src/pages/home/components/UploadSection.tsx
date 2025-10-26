@@ -95,7 +95,7 @@ export default function UploadSection() {
 
         try {
             // 🔗 Send request to Flask backend
-            const response = await fetch('http://localhost:5000/add_watermark', {
+            const response = await fetch('http://127.0.0.1:5001/add_watermark', {
                 method: 'POST',
                 body: formData,
             });
